@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>✈️ Flight Unblocker</title>
+  <style>
+    :root {
+      --primary: #3a86ff;
+      --accent: #4cc9f0;
+      --background: #f5f7fa;
+      --card: #ffffff;
+      --text: #1a1a1a;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px var(--shadow);
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      margin-top: 20px;
+      z-index: 2;
+    }
+
+    .card input {
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      width: 100%;
+    }
+
+    .card button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .card button:hover {
+      background: #38bdf8;
+    }
+
+    iframe {
+      margin-top: 30px;
+      width: 100vw;
+      height: calc(100vh - 260px); /* adjust height based on header + form */
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px var(--shadow);
+      background: white;
+      transition: height 0.2s ease, width 0.2s ease;
+    }
+
+    #viewer {
+      display: none;
+    }
+    #viewer.active {
+      display: block;
+    }
+
+  
+
+    @media (max-width: 600px) {
+      iframe {
+        height: 60vh;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>✈️ Flight Unblocker</h1>
+    <p style="color: #555; margin-top: 0.5rem;">Browse safely and freely from anywhere</p>
+  </header>
+
+  <div class="card">
+    <input type="text" id="url" placeholder="Enter a website or search something..." />
+    <button id="go">Launch</button>
+  </div>
+
+  <iframe id="viewer"></iframe>
+
+  <script>
+    document.getElementById('go').addEventListener('click', function () {
+      
+      const input = document.getElementById('url').value.trim();
+      if (!input) return alert('Please enter a URL or search term.');
+      document.getElementById ('viewer').classList.add('active');
+      const iframe = document.getElementById('viewer');
+      iframe.src = `http://localhost:8080/proxy?url=${encodeURIComponent(input)}`;
+    });
+  </script>
+
+</body>
+</html>
