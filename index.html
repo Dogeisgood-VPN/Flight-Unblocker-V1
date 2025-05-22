@@ -84,7 +84,7 @@
     iframe {
       margin-top: 30px;
       width: 100vw;
-      height: calc(100vh - 260px); /* adjust height based on header + form */
+      height: calc(100vh - 260px);
       border: none;
       border-radius: 12px;
       box-shadow: 0 4px 12px var(--shadow);
@@ -98,8 +98,6 @@
     #viewer.active {
       display: block;
     }
-
-  
 
     @media (max-width: 600px) {
       iframe {
@@ -125,12 +123,11 @@
 
   <script>
     document.getElementById('go').addEventListener('click', function () {
-      
       const input = document.getElementById('url').value.trim();
       if (!input) return alert('Please enter a URL or search term.');
-      document.getElementById ('viewer').classList.add('active');
+      document.getElementById('viewer').classList.add('active');
       const iframe = document.getElementById('viewer');
-      iframe.src = `http://localhost:8080/proxy?url=${encodeURIComponent(input)}`;
+      iframe.src = `/proxy?url=${encodeURIComponent(input)}`;
     });
   </script>
 
